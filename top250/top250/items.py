@@ -5,10 +5,16 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Field, Item
 
 
-class Top250Item(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Top250Item(Item):
+    rank = Field()
+    name = Field()
+    des = Field()
+    star = Field()
+    evaluate = Field()
+    quote = Field()
+    images = Field()
+    image_urls = Field()
+    image_paths = Field()

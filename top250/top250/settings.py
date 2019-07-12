@@ -14,12 +14,20 @@ BOT_NAME = 'top250'
 SPIDER_MODULES = ['top250.spiders']
 NEWSPIDER_MODULE = 'top250.spiders'
 
+# mongodb
+mongo_host = '127.0.0.1'
+mongo_port = 27017
+mongo_db_name = 'douban_movie_rank'
+mongo_db_collection = 'top250'
+
+# image
+IMAGES_STORE = 'images'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'top250 (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -39,34 +47,35 @@ ROBOTSTXT_OBEY = True
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
+# DEFAULT_REQUEST_HEADERS = {
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
-#}
+# }
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'top250.middlewares.Top250SpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = {
+    'top250.middlewares.Top250SpiderMiddleware': 543
+}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'top250.middlewares.Top250DownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'top250.middlewares.MyUserAgent': 544
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'top250.pipelines.Top250Pipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'top250.pipelines.Top250Pipeline': 300,
+    'top250.pipelines.Top250PicPipeline': 1
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
