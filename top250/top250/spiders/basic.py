@@ -9,6 +9,12 @@ class BasicSpider(scrapy.Spider):
     start_urls = ['https://movie.douban.com/top250']
 
     def parse(self, response):
+        """ This function parses a property page
+        @url https://movie.douban.com/top250
+        @returns items 1
+        @returns request 1
+        @scrapes rank name des evaluate quote image_urls images
+        """
         items = response.xpath('//*[@id="content"]/div/div[1]/ol/li')
         for item in items:
             top250_item = Top250Item()

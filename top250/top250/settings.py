@@ -22,6 +22,7 @@ mongo_db_collection = 'top250'
 
 # image
 IMAGES_STORE = 'images'
+# IMAGES_THUMBS = {'small': (50, 50)}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'top250 (+http://www.yourdomain.com)'
