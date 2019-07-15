@@ -33,6 +33,11 @@ class Top250PicPipeline(ImagesPipeline):
         for image_url in item['image_urls']:
             yield scrapy.Request(image_url, headers={'referer': image_url})
 
+    def file_path(self, request, response=None, info=None):
+        url = request.url
+        file_name = url.split('/')[-1]
+        return file_name
+
     def item_completed(self, results, item, info):
         image_paths = [x['path'] for ok, x in results if ok]
         if not image_paths:

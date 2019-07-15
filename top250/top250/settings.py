@@ -14,6 +14,9 @@ BOT_NAME = 'top250'
 SPIDER_MODULES = ['top250.spiders']
 NEWSPIDER_MODULE = 'top250.spiders'
 
+# Logging
+LOG_LEVEL='WARNING'
+
 # mongodb
 mongo_host = '127.0.0.1'
 mongo_port = 27017
@@ -22,7 +25,7 @@ mongo_db_collection = 'top250'
 
 # image
 IMAGES_STORE = 'images'
-# IMAGES_THUMBS = {'small': (50, 50)}
+IMAGES_THUMBS = {'small': (50, 50)}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'top250 (+http://www.yourdomain.com)'
