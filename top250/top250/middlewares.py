@@ -7,6 +7,8 @@
 
 from scrapy import signals
 import random
+import requests
+from top250.settings import proxy_url
 
 
 class Top250SpiderMiddleware(object):
@@ -102,6 +104,28 @@ class Top250DownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class RandomProxy(object):
+    def process_request(self, request, spider):
+        request.meta['proxy'] = 'http://' + str(self.proxy())
+
+    def proxy(self):
+        proxy = requests.get(proxy_url+'/get').text
+        try:
+            print('start to get proxy ...')
+            ip = {'http': 'http://' + proxy, 'https': 'https://' + proxy}
+            r = requests.get('http://www.baidu.com', proxies=ip, timeout=3)
+            print(r.status_code)
+            if r.status_code == 200:
+                return proxy
+        except:
+            print('get proxy again ...')
+            self.delete_proxy(proxy)
+            return self.proxy()
+
+    def delete_proxy(self, proxy):
+        requests.get(proxy_url+'/delete/?proxy={}'.format(proxy))
 
 
 class MyUserAgent(object):

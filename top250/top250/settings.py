@@ -23,6 +23,9 @@ mongo_port = 27017
 mongo_db_name = 'douban_movie_rank'
 mongo_db_collection = 'top250'
 
+# proxy pool
+proxy_url='http://127.0.0.1:5010'
+
 # image
 IMAGES_STORE = 'images'
 IMAGES_THUMBS = {'small': (50, 50)}
@@ -39,13 +42,13 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+# DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -65,6 +68,7 @@ SPIDER_MIDDLEWARES = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
+    'top250.middlewares.RandomProxy': 1,
     'top250.middlewares.MyUserAgent': 544
 }
 
@@ -78,7 +82,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'top250.pipelines.Top250Pipeline': 300,
-    'top250.pipelines.Top250PicPipeline': 1
+    'top250.pipelines.Top250PicPipeline': 2
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
