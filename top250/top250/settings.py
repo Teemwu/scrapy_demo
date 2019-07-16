@@ -15,7 +15,7 @@ SPIDER_MODULES = ['top250.spiders']
 NEWSPIDER_MODULE = 'top250.spiders'
 
 # Logging
-LOG_LEVEL='WARNING'
+# LOG_LEVEL='WARNING'
 
 # mongodb
 mongo_host = '127.0.0.1'

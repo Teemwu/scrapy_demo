@@ -42,10 +42,19 @@ class BasicSpider(scrapy.Spider):
             top250_item['image_urls'] = item.xpath('.//div/div[1]/a/img/@src').extract()
             top250_item['images'] = item.xpath('.//div/div[1]/a/img/@src').re(r'[^/]*.[jpg|png|gif|webp]$')
 
-            yield top250_item
+            # 爬取详情页
+            detail_url = item.xpath('.//div/div[2]/div[1]/a/@href').extract()[0]
+            yield scrapy.Request(detail_url, meta=top250_item, callback=self.parse_item)
 
+        # 爬取下一页
         next_link = response.xpath('//*[@id="content"]/div/div[1]/div[2]/span[3]/link/@href').extract()
-
         if next_link:
             next_link = next_link[0]
             yield scrapy.Request('https://movie.douban.com/top250'+next_link, callback=self.parse)
+
+    def parse_item(self, response):
+        top250_item = response.meta
+        top250_item['types'] = response.xpath('//*[@property="v:genre"]/text()').extract()
+        top250_item['runtime'] = response.xpath('//*[@property="v:runtime"]/text()').extract_first()
+        top250_item['summary'] = response.xpath('//*[@property="v:summary"]/text()').extract_first()
+        return top250_item

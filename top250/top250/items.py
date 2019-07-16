@@ -18,3 +18,8 @@ class Top250Item(Item):
     images = Field()
     image_urls = Field()
     image_paths = Field()
+
+    # 详情页
+    types = Field()
+    summary = Field()
+    runtime = Field()

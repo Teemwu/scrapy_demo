@@ -41,6 +41,6 @@ class Top250PicPipeline(ImagesPipeline):
     def item_completed(self, results, item, info):
         image_paths = [x['path'] for ok, x in results if ok]
         if not image_paths:
-            raise DropItem('图片为下载好：%s', image_paths)
+            raise DropItem('图片未下载好：%s', image_paths)
         item['image_paths'] = image_paths
         return item
