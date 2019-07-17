@@ -24,11 +24,11 @@ mongo_db_name = 'douban_movie_rank'
 mongo_db_collection = 'top250'
 
 # proxy pool
-proxy_url='http://127.0.0.1:5010'
+proxy_url = 'http://127.0.0.1:5010'
 
 # image
 IMAGES_STORE = 'images'
-IMAGES_THUMBS = {'small': (50, 50)}
+# IMAGES_THUMBS = {'small': (50, 50)}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'top250 (+http://www.yourdomain.com)'
@@ -42,7 +42,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -68,7 +68,7 @@ SPIDER_MIDDLEWARES = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'top250.middlewares.RandomProxy': 1,
+    # 'top250.middlewares.RandomProxy': 1,
     'top250.middlewares.MyUserAgent': 544
 }
 

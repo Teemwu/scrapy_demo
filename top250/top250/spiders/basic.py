@@ -19,7 +19,7 @@ class BasicSpider(scrapy.Spider):
         for item in items:
             top250_item = Top250Item()
             # 排名
-            top250_item['rank'] = item.xpath('.//div/div[1]/em/text()').extract_first()
+            top250_item['rank'] = int(item.xpath('.//div/div[1]/em/text()').extract_first())
             # 名称
             names = item.xpath('.//div/div[2]/div[1]/a/span')
             name_str = ''
@@ -33,7 +33,7 @@ class BasicSpider(scrapy.Spider):
                 content_str += ''.join(content.split())
             top250_item['des'] = content_str
             # 评分
-            top250_item['star'] = item.xpath('.//div/div[2]/div[2]/div/span[2]/text()').extract_first()
+            top250_item['star'] = float(item.xpath('.//div/div[2]/div[2]/div/span[2]/text()').extract_first())
             # 评价
             top250_item['evaluate'] = item.xpath('.//div/div[2]/div[2]/div/span[4]/text()').extract_first()
             # 描述
