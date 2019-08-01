@@ -57,4 +57,4 @@ class BasicSpider(scrapy.Spider):
         top250_item['types'] = response.xpath('//*[@property="v:genre"]/text()').extract()
         top250_item['runtime'] = response.xpath('//*[@property="v:runtime"]/text()').extract_first()
         top250_item['summary'] = response.xpath('//*[@property="v:summary"]/text()').extract_first()
-        return top250_item
+        yield top250_item

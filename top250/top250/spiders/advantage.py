@@ -20,7 +20,7 @@ class AdvantageSpider(scrapy.Spider):
         items = response.xpath('//*[@id="content"]/div/div[1]/ol/li')
         print(len(items))
         for item in items:
-            l = DefineItemLoader(item=Top250ItemLoader(), response=response, selector=item,)
+            l = DefineItemLoader(item=Top250ItemLoader(), response=response, selector=item)
             l.add_xpath('rank', 'div/div[1]/em/text()')
             l.add_xpath('name', 'div/div[2]/div[1]/a/span/text()')
             l.add_xpath('des', 'div/div[2]/div[2]/p[1]/text()')
