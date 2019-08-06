@@ -17,6 +17,12 @@ class BasicSpider(CrawlSpider):
     )
 
     def parse_item(self, response):
+        """ parse page and contracting
+        @url http://www.laifudao.com
+        @return items 1
+        @return request 1
+        @scrapes title
+        """
 
         # path = os.getcwd()
         # images = os.path.join(path, 'images')
